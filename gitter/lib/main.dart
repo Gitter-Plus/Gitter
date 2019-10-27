@@ -1,52 +1,40 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+import 'package:gitter/constants.dart';
+import 'package:gitter/menu.dart';
+import 'package:gitter/post.dart';
 
-class MyApp extends StatelessWidget {
+void main() => runApp(Gitter());
+
+class Gitter extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp(
-    title: 'Flutter Demo',
-    theme: ThemeData(
-      primarySwatch: Colors.blue,
-    ),
-    home: MyHomePage(title: 'Flutter Demo Home Page'),
+    home: Home(),
   );
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  _MyHomePageState createState() => _MyHomePageState();
+class Home extends StatefulWidget {
+  _HomeState createState() => _HomeState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() => setState(() => _counter++);
+class _HomeState extends State<Home> {
+  static Widget divider(double height) => Container(
+    width: 1.0,
+    height: height,
+    color: GitterColors.divider
+  );
 
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: Text(widget.title),
-    ),
-    body: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            'You have pushed the button this many times:',
-          ),
-          Text(
-            '$_counter',
-            style: Theme.of(context).textTheme.display1,
-          ),
-        ],
-      ),
-    ),
-    floatingActionButton: FloatingActionButton(
-      onPressed: _incrementCounter,
-      tooltip: 'Increment',
-      child: Icon(Icons.add),
+    backgroundColor: GitterColors.background,
+    body: Column(
+      children: <Widget>[
+        Menu(),
+        Row(
+          children: <Widget>[
+            Post(),
+            divider(MediaQuery.of(context).size.height - menuHeight),
+          ],
+        ),
+      ],
     ),
   );
 }
